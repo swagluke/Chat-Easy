@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
 import { MainComponent } from './+main/main.component';
 import { SigninComponent } from './+signin/signin.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,7 @@ import { SigninComponent } from './+signin/signin.component';
     AngularFireModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
