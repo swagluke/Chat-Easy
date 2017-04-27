@@ -16,12 +16,9 @@ import { SigninComponent } from './+signin/signin.component';
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
     MainComponent,
-    SigninComponent
-=======
+    SigninComponent,
     ChatBoxComponent
->>>>>>> 0d11d822d9a0e302ec8f4cf9ff4acc8f1ed66daa
   ],
   imports: [
     BrowserModule,
