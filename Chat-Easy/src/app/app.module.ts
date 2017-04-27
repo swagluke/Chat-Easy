@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChatBoxComponent } from './chat-box/chat-box.component';
+import { ChatBoxComponent } from './+chat-box/chat-box.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { FlexLayoutModule } from '@angular/flex-layout';
