@@ -15,6 +15,10 @@
     <button *ngIf="authService.isSignedInStream | async" md-icon-button (click)="sidenav.toggle()">
       <md-icon>menu</md-icon>
     </button> Chat Easy
+    <span fxFlex></span>
+    <span *ngIf="(authService.displayNameStream | async) as name">
+     {{ name }}
+     </span>
   </md-toolbar>
   <router-outlet></router-outlet>
 </md-sidenav-container>
