@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ChatBoxComponent } from './chat-box/chat-box.component';
+
 import { AngularFireModule } from 'angularfire2';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,8 +16,12 @@ import { SigninComponent } from './+signin/signin.component';
 @NgModule({
   declarations: [
     AppComponent,
+<<<<<<< HEAD
     MainComponent,
     SigninComponent
+=======
+    ChatBoxComponent
+>>>>>>> 0d11d822d9a0e302ec8f4cf9ff4acc8f1ed66daa
   ],
   imports: [
     BrowserModule,
