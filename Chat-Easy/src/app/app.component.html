@@ -16,7 +16,7 @@
       <md-icon>menu</md-icon>
     </button> Chat Easy
     <span fxFlex></span>
-    <span *ngIf="(authService.displayNameStream | async) as name">
+    <span *ngIf="(authService.currentUserUid) as name">
      {{ name }}
      </span>
   </md-toolbar>
