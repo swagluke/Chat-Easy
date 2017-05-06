@@ -15,6 +15,7 @@ import { MainComponent } from './+main/main.component';
 import { SigninComponent } from './+signin/signin.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ChatService } from './services/chat.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,7 @@ import { AuthGuardService } from './services/auth-guard.service';
     AngularFireModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [AuthService, AuthGuardService],
+  providers: [AuthService, AuthGuardService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
