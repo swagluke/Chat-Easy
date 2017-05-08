@@ -9,14 +9,20 @@
       </span>
     </md-card-title>
     <button id="google-button" md-button (click)="authService.signInWithGoogle()"></button>
+    <button id="facebook-button" md-button (click)="authService.signInWithFacebook()">Facebook Login</button>
     <button id="rosefire-button" md-button (click)="authService.signInWithRosefire()">Rose-Hulman Login</button>
+
   </md-card>
 
   <ng-template #alreadySignedInTemplate>
     <md-card fxLayout="column" fxLayoutAlign="none center">
       <md-card-title>
-        Signed in as {{authService.currentUserUid}}
+        Signed in as {{authService.displayNameStream | async}}
       </md-card-title>
+      <img *ngIf="(authService.photoUrlStream | async) as photoUrl;else missingPhotoTemplate" [src]="photoUrl" alt="Google profile photo">
+      <template #missingPhotoTemplate>
+        <img src="assets/images/missing_photo.png" alt="Photo missing">
+      </template>
       <button md-raised-button (click)="authService.signOut()">Sign Out</button>
     </md-card>
   </ng-template>

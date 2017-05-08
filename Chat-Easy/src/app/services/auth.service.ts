@@ -7,7 +7,6 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
-  //private _isSignedIn = false;
   private currentUser: string;
   private rosefire: boolean = false;
 
@@ -17,7 +16,6 @@ export class AuthService {
     this.afAuth.subscribe((authState: FirebaseAuthState) => {
       if (authState) {
         console.log("You are signed in. All is good.");
-        //this._isSignedIn = true;
         if (authState.google) {
           this.currentUser = authState.google.displayName;
         }
@@ -41,8 +39,22 @@ export class AuthService {
     return this.afAuth.map<FirebaseAuthState, string>((authState: FirebaseAuthState) => {
       if (authState && authState.google) {
         return authState.google.displayName;
+      } else if (authState && authState.facebook) {
+        return authState.facebook.displayName;
+      } else if (authState) {
+        return this.currentUser;
       }
       return null;
+    });
+  }
+
+  signInWithFacebook(): void {
+    this.afAuth.login({
+      provider: AuthProviders.Facebook,
+      method: AuthMethods.Popup
+    }).then((authState: FirebaseAuthState) => {
+      this.rosefire = false;
+      this.router.navigate(['/']);
     });
   }
 
@@ -79,5 +91,16 @@ export class AuthService {
 
   get currentUserUid(): string {
     return this.currentUser;
+  }
+
+  get photoUrlStream(): Observable<string> {
+    return this.afAuth.map<FirebaseAuthState, string>((authState: FirebaseAuthState) => {
+      if (authState && authState.google) {
+        return authState.google.photoURL;
+      } else if (authState && authState.facebook) {
+        return authState.facebook.photoURL;
+      }
+      return null;
+    });
   }
 }
