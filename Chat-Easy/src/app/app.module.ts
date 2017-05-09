@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ChatBoxComponent } from './+chat-box/chat-box.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -15,13 +14,21 @@ import { MainComponent } from './+main/main.component';
 import { SigninComponent } from './+signin/signin.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
-import { ChatService } from './services/chat.service';
+import { AuthorService } from './services/author.service';
+import { PostService } from './services/post.service';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { PostComponent } from './post/post.component';
+import { PostListComponent } from './post-list/post-list.component';
+import { ReversePipe } from './reverse.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     SigninComponent,
-    ChatBoxComponent
+    CreatePostComponent,
+    PostComponent,
+    PostListComponent,
+    ReversePipe,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,12 @@ import { ChatService } from './services/chat.service';
     AngularFireModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [AuthService, AuthGuardService, ChatService],
+  providers: [
+    AuthService, 
+    AuthGuardService,
+    PostService,
+    AuthorService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
