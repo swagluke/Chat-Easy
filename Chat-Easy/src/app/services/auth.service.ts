@@ -2,29 +2,37 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth, FirebaseAuthState, AuthProviders, AuthMethods } from "angularfire2";
 import { Router } from "@angular/router";
+import { AuthorService } from './author.service';
 import 'rosefire';
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
-  private currentUser: string;
+  private _currentUserUid: string;
   private rosefire: boolean = false;
 
   constructor(
     private afAuth: AngularFireAuth,
-    private router: Router) {
+    private router: Router,
+    private authorService: AuthorService
+  ) {
     this.afAuth.subscribe((authState: FirebaseAuthState) => {
       if (authState) {
         console.log("You are signed in. All is good.");
         if (authState.google) {
-          this.currentUser = authState.google.displayName;
+          this.authorService.updateAuthor(authState.uid, authState.google.displayName,
+            authState.google.photoURL);
+        } else if (authState.facebook) {
+          this.authorService.updateAuthor(authState.uid, authState.facebook.displayName,
+            authState.facebook.photoURL);
+        } else {
+           this.authorService.updateAuthor(authState.uid, authState.uid,
+            null);         
         }
-        else {
-          this.currentUser = authState.uid;
-        }
+        this._currentUserUid = authState.uid;
       } else {
         console.log("Not signed in.");
-        this.currentUser = "";
+        this._currentUserUid = "";
       }
     });
   }
@@ -42,7 +50,7 @@ export class AuthService {
       } else if (authState && authState.facebook) {
         return authState.facebook.displayName;
       } else if (authState) {
-        return this.currentUser;
+        return this._currentUserUid;
       }
       return null;
     });
@@ -84,13 +92,14 @@ export class AuthService {
       });
     });
   }
+
   signOut(): void {
     this.afAuth.logout();
     this.router.navigate(['/signin']);
   }
 
   get currentUserUid(): string {
-    return this.currentUser;
+    return this._currentUserUid;
   }
 
   get photoUrlStream(): Observable<string> {
