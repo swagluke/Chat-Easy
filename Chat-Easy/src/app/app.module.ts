@@ -20,6 +20,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { PostComponent } from './post/post.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { ReversePipe } from './reverse.pipe';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { ReversePipe } from './reverse.pipe';
     BrowserAnimationsModule,
     AngularFireModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    Ng2AutoCompleteModule,
   ],
   providers: [
     AuthService, 
