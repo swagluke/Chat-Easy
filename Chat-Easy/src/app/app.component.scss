@@ -1,0 +1,24 @@
+md-sidenav {
+  width: 200px;
+  color: white;
+}
+
+md-toolbar {
+  background-color: rgb(3, 155, 229);
+  color: white;
+}
+
+#user-pic {
+  top: 2px;
+  width: 33px;
+  height: 33px;
+  background-size: 33px;
+  border-radius: 50%;
+}
+
+#user-name {
+  font-size: 16px;
+  line-height: 36px;
+  padding-right: 10px;
+  padding-left: 10px;
+}

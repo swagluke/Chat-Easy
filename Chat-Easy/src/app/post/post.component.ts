@@ -14,25 +14,33 @@ export enum EditMode {
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss', '../shared/common.scss']
+  styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
 
   @Input() post: PostWithAuthor;
   public editingMode: EditMode = EditMode.NoEditable;
+  public isPic: boolean = false;
   public updatedPostBody: string;
   constructor(private authService: AuthService,
-  private postService: PostService,
-  public snackBar: MdSnackBar) { }
+    private postService: PostService,
+    public snackBar: MdSnackBar) { }
 
   ngOnInit() {
     if (this.post.authorKey == this.authService.currentUserUid) {
       this.editingMode = EditMode.DisplayEditButton;
+      if (this.post.postBody.indexOf("https://firebasestorage.googleapis.com/v0/b/zhangl-chat-easy.appspot.com/o/") >= 0) {
+        this.isPic = true;
+        // console.log("It's a pic");
+      }
+      else {
+        this.isPic = false;
+      }
     }
   }
 
   enableEditing(inputEl: HTMLInputElement): void {
-    setTimeout( ()=>{
+    setTimeout(() => {
       inputEl.focus();
     });
 
@@ -47,7 +55,7 @@ export class PostComponent implements OnInit {
       duration: 5000,
     });
 
-    snackBarRef.onAction().subscribe(  () => { 
+    snackBarRef.onAction().subscribe(() => {
       console.log("TODO: Put it back!");
       const restoredPost = new Post();
       restoredPost.postBody = this.post.postBody;
@@ -56,7 +64,7 @@ export class PostComponent implements OnInit {
       this.snackBar.open("Post restored!", "", {
         duration: 3000,
       })
-     })
+    })
   }
 
   saveEdit(): void {

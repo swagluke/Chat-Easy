@@ -2,6 +2,7 @@ import { PostService } from './../services/post.service';
 import { Post } from '../models/post.model';
 import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-create-post',
@@ -619,11 +620,27 @@ export class CreatePostComponent implements OnInit {
         postBody: this.postBody,
         authorKey: this.authService.currentUserUid
       });
-      this.postService.add(post);
-      this.postBody = "";
+      if (this.postBody!=undefined && this.postBody!=null) {
+        this.postService.add(post);
+        this.postBody = "";
+      }
     } catch (e) {
       console.log("Error on submit", e);
     }
   }
 
+  photoSelected(event: any) {
+    const file: File = event.target.files[0];
+    const metadata = { "content-type": file.type };
+    const storageRef: firebase.storage.Reference = firebase.storage().ref().child("photos").child(file.name);
+    const uploadTask: firebase.storage.UploadTask = storageRef.put(file, metadata);
+    uploadTask.then((uploadSnapShot: firebase.storage.UploadTaskSnapshot) => {
+      const downloadUrl = uploadSnapShot.downloadURL;
+      this.postBody = downloadUrl;
+    })
+  }
+
+  triggerInput(inputEl) {
+    inputEl.click();
+  }
 }

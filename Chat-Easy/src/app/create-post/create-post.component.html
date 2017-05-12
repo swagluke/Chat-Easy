@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <md-card>
   <img *ngIf="(authService.photoUrlStream | async) as photoUrl;else missingPhotoTemplate" [src]="photoUrl" alt="Google profile photo">
   <template #missingPhotoTemplate>
@@ -5,7 +6,15 @@
   </template>
   <form fxFlex (ngSubmit)="onSubmit()">
     <md-input-container fxFlex dividerColor="warn">
-      <input ng2-auto-complete [source]="arrayOfWords" mdInput type="text" placeholder="Make a post" required [(ngModel)]="postBody" name="postBody">
+      <input autocomplete="off" mdInput type="text" placeholder="Make a post" required [(ngModel)]="postBody"
+        name="postBody">
+      <!--<input required ng2-auto-complete [source]="arrayOfWords" mdInput type="text" placeholder="Make a post" required [(ngModel)]="postBody"
+        name="postBody">-->
     </md-input-container>
+    <button md-button class="md-raised">Send</button>
+    <button class="md-raised" (click)="triggerInput(photoInput)">
+      <md-icon id="uploadImage" aria-label="Image" class="material-icons md-36">image</md-icon>
+      <input #photoInput style="display: none;" type="file" (change)="photoSelected($event)">
+    </button>
   </form>
 </md-card>
