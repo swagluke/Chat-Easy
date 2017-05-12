@@ -1,23 +1,34 @@
 .author-name {
-    font-weight: bold;
+  display: inline-block;
+  width: 100%;
+  color: #bbb;
+  font-style: italic;
+  font-size: 12px;
+  box-sizing: border-box;
 }
 
 md-input-container {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .hide {
-    display: none;
+  display: none;
 }
 
 #profilePic {
-    height: 60px;
-    margin-right: 10px;
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+#postText {
+    margin-top: 10px;
 }
 
 #postPic {
-    height: 300px;
-    display: block;
-    margin: auto;
+  height: 300px;
+  max-width: 300px;
+  max-height: 300px;
+  display: block;
+  margin: auto;
 }
-

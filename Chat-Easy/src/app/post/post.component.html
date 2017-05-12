@@ -5,13 +5,13 @@
   </template>
 
   <div fxFlex fxLayout="column">
-    <div fxFlex class="author-name">{{post.author.displayName}}</div>
-    <div fxFlex *ngIf="editingMode!=2 && isPic==false" class="post-body">{{post.postBody}} </div>
-    <div fxFlex *ngIf="editingMode!=2 && isPic==true" class="post-body"><img id="postPic"src="{{post.postBody}}"></div>
+    <div fxFlex *ngIf="editingMode!=2 && isPic==false" class="post-body" id="postText">{{post.postBody}} </div>
+    <div fxFlex *ngIf="editingMode!=2 && isPic==true" class="post-body"><img id="postPic" src="{{post.postBody}}"></div>
     <md-input-container [class.hide]="editingMode!=2" dividerColor="accent">
       <input #updateInputEl type="text" mdInput placeholder="Edit your post" [(ngModel)]="updatedPostBody" name="updatedPostBody"
         (keyup.enter)="saveEdit()">
     </md-input-container>
+    <div fxFlex class="author-name">{{post.author.displayName}}</div>
   </div>
 
   <div *ngIf="editingMode==1">
