@@ -1,4 +1,6 @@
-export let autocompleteCS = () => {
+declare var jQuery;
+
+export const autocompleteCS = () => {
 var availableTags = [
    ".NET",
     "/n",
@@ -26,6 +28,7 @@ var availableTags = [
     "Algol",
     "Algorithm",
     "Ambient Occlusion",
+    "Angular",
     "AOP",
     "API",
     "Applet",
@@ -610,21 +613,22 @@ var endss;
 function getCaret(el) {
     if (el.selectionStart) {
         return el.selectionStart;
-    } else if (document.selection) {
-        el.focus();
-
-        var r = document.selection.createRange();
-        if (r == null) {
-            return 0;
-        }
-
-        var re = el.createTextRange(),
-            rc = re.duplicate();
-        re.moveToBookmark(r.getBookmark());
-        rc.setEndPoint('EndToStart', re);
-
-        return rc.text.length;
     }
+    // else if (document.getSelection()) {
+    //     el.focus();
+
+    //     var r = document.getSelection().createRange();
+    //     if (r == null) {
+    //         return 0;
+    //     }
+
+    //     var re = el.createTextRange(),
+    //         rc = re.duplicate();
+    //     re.moveToBookmark(r.getBookmark());
+    //     rc.setEndPoint('EndToStart', re);
+
+    //     return rc.text.length;
+    // }
     return 0;
 }
 
@@ -750,7 +754,7 @@ jQuery("#tags")
             );
             div.remove();
 
-            pos.at = "left+" + offset + " bottom";
+            pos['at'] = "left+" + offset + " bottom";
             input.autocomplete("option", "position", pos);
 
             widget.position(jQuery.extend({ of: input

@@ -3,7 +3,7 @@ import { Post } from '../models/post.model';
 import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase';
-import { autocompleteCS } from './create-post.js';
+import { autocompleteCS } from './create-post';
 
 // declare var jQuery;
 

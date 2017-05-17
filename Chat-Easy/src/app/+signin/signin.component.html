@@ -20,9 +20,9 @@
         Signed in as {{authService.displayNameStream | async}}
       </md-card-title>
       <img *ngIf="(authService.photoUrlStream | async) as photoUrl;else missingPhotoTemplate" [src]="photoUrl" alt="Profile photo">
-      <template #missingPhotoTemplate>
-        <img src="assets/images/missing_photo.png" alt="Photo missing">
-      </template>
+      <!--<template #missingPhotoTemplate>
+        <img id="missing" src="assets/images/missing_photo.png" alt="Photo missing">
+      </template>-->
       <button md-raised-button (click)="authService.signOut()">Sign Out</button>
     </md-card>
   </ng-template>

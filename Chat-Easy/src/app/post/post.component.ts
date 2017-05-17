@@ -27,15 +27,15 @@ export class PostComponent implements OnInit {
     public snackBar: MdSnackBar) { }
 
   ngOnInit() {
+    if (this.post.postBody.indexOf("https://firebasestorage") >= 0) {
+      this.isPic = true;
+      // console.log("It's a pic");
+    }
+    else {
+      this.isPic = false;
+    }
     if (this.post.authorKey == this.authService.currentUserUid) {
       this.editingMode = EditMode.DisplayEditButton;
-      if (this.post.postBody.indexOf("https://firebasestorage.googleapis.com/v0/b/zhangl-chat-easy.appspot.com/o/") >= 0) {
-        this.isPic = true;
-        // console.log("It's a pic");
-      }
-      else {
-        this.isPic = false;
-      }
     }
   }
 
